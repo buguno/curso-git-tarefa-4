@@ -5,9 +5,17 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: 💡 Checkout repository
@@ -26,3 +34,4 @@ jobs:
           folder: public
           branch: gh-pages
           clean: true
+          force: true
